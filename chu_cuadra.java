@@ -33,7 +33,9 @@ public class chu_cuadra {
     public static void Ft(int f, int c, int total, int[][] arr, int[] arrV, int[] arrH) {
         int[][] arrFT = new int[f][c];
 
-
+        for (int index = 0; index < array.length; index++) {
+            
+        }
     }
 
     public static double gradoLibertad(int filas, int columnas) {
