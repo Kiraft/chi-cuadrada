@@ -1,8 +1,5 @@
 import java.util.Scanner;
 
-/**
- * chu_cuadra
- */
 public class chu_cuadra {
     public static void main(String[] args) {
 
@@ -13,9 +10,6 @@ public class chu_cuadra {
         int c = sc.nextInt() ;        
 
         final double margen = 0.01;
-        
-        
-        
 
         int[][] matrizOriginal = llenarMatriz(f, c, sc);
         
@@ -25,17 +19,43 @@ public class chu_cuadra {
 
         int total = Totales(Hmatriz);
 
+        double[][] FtMatriz = Ft(f, c, total, Vmatriz, Hmatriz);
+
+        // for (int i = 0; i < FtMatriz.length; i++) {
+
+        //     for (int j = 0; j < FtMatriz[i].length; j++) {
+        //         System.out.println(FtMatriz[i][j]);
+        //     }
+        // } 
+
+        System.out.println(XCuadrada(matrizOriginal, FtMatriz));
+
         // double gradoLibertad = gradoLibertad(f, c);
-        
         
     }
 
-    public static void Ft(int f, int c, int total, int[][] arr, int[] arrV, int[] arrH) {
-        int[][] arrFT = new int[f][c];
-
-        for (int index = 0; index < array.length; index++) {
-            
+    public static double XCuadrada(int[][] original, double[][] Ft) {
+        double count = 0;
+        for (int i = 0; i < Ft.length; i++) {
+            for (int j = 0; j < Ft[i].length; j++) {
+                count += Math.pow((original[i][j] - (Ft[i][j])), 2)/(Ft[i][j]);
+            }
         }
+        return count;
+    }
+
+    public static double[][] Ft(int f, int c, int total, int[] arrV, int[] arrH) {
+        double[][] arrFT = new double[f][c];
+
+        for (int i = 0; i < arrFT.length; i++) {
+
+            for (int j = 0; j < arrFT[i].length; j++) {
+
+                arrFT[i][j] = (double) (arrV[i]*arrH[j])/total;
+            }
+        } 
+
+        return arrFT;
     }
 
     public static double gradoLibertad(int filas, int columnas) {
@@ -44,9 +64,7 @@ public class chu_cuadra {
         return v;
     }
 
-    public static void sumaRecursiva() {
-        
-    }
+
 
     public static int Totales(int[] arr) {
         int count = 0;
