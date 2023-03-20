@@ -4,13 +4,13 @@ public class chu_cuadra {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        System.out.print("Ingresa el tamana de la tabla | FILAS: ");
+        System.out.print("Ingresa el tamaño de la tabla | FILAS: ");
         int f = sc.nextInt();
-        System.out.print("Ingresa el tamana de la tabla | COLUMNAS: ");
+        System.out.print("Ingresa el tamaño de la tabla | COLUMNAS: ");
         int c = sc.nextInt();        
 
         
-        System.out.println("Ingrese el margen de error: ");
+        System.out.print("Ingrese el margen de error: ");
         final double margen = sc.nextDouble(); 
 
         int[][] matrizOriginal = llenarMatriz(f, c, sc);
