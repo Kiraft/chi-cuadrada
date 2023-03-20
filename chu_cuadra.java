@@ -21,16 +21,9 @@ public class chu_cuadra {
 
         double[][] FtMatriz = Ft(f, c, total, Vmatriz, Hmatriz);
 
-        // for (int i = 0; i < FtMatriz.length; i++) {
+        System.out.println("Chi cuadrada: "+XCuadrada(matrizOriginal, FtMatriz));
 
-        //     for (int j = 0; j < FtMatriz[i].length; j++) {
-        //         System.out.println(FtMatriz[i][j]);
-        //     }
-        // } 
-
-        System.out.println(XCuadrada(matrizOriginal, FtMatriz));
-
-        // double gradoLibertad = gradoLibertad(f, c);
+        System.out.println("Chi cuadrada critica: " + tablaDistribucion(gradoLibertad(f, c), margen));
         
     }
 
@@ -58,13 +51,11 @@ public class chu_cuadra {
         return arrFT;
     }
 
-    public static double gradoLibertad(int filas, int columnas) {
+    public static int gradoLibertad(int filas, int columnas) {
 
-        double v = (filas - 1)*(columnas - 1);
+        int v = (filas - 1)*(columnas - 1);
         return v;
     }
-
-
 
     public static int Totales(int[] arr) {
         int count = 0;
@@ -118,5 +109,45 @@ public class chu_cuadra {
             count = 0;
         }     
         return Hmatriz;
-    }    
+    }   
+    
+    public static double tablaDistribucion(int gL, double mE) {
+        int[] gradeLibertyArr = {1, 2, 3, 4, 5};
+        double[] marginErrorArr = {0.001, 0.0025, 0.005, 0.01, 0.025, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5};
+
+        double[][] tabla = {
+        {10.8274, 9.1404, 7.8794, 6.6349, 5.0239, 3.8415, 2.7055, 2.0722, 1.6424, 1.3233, 1.0742, 0.8735, 0.7083, 0.5707, 0.4549},
+        {13.8150, 11.9827, 10.5965, 9.2104, 7.3778, 5.9915, 4.6052, 3.7942, 3.2189, 2.7726, 2.4079, 2.0996, 1.8326, 1.5970, 1.3863},
+        {16.2660, 14.3202, 12.8381, 11.3449, 9.3484, 7.8147, 6.2514, 5.3170, 4.6416, 4.1083, 3.6649, 3.2831, 2.9462, 2.6430, 2.3660}, 
+        {18.4662, 16.4238, 14.8602, 13.2767, 11.1433, 9.4877, 7.7794, 6.7449, 5.9886, 5.3853, 4.8784, 4.4377, 4.0446, 3.6871, 3.3567}, 
+        {20.5147, 18.3854, 16.7496, 15.0863, 12.8325, 11.0705, 9.2363, 8.1152, 7.2893, 6.6257, 6.0644, 5.5731, 5.1319, 4.7278, 4.3515}
+        };
+
+        int auxI = 200; //Los valore son para rapido
+        int auxJ = 200; //Los valore son para rapido
+        double resultado;
+
+        for (int i = 0; i < gradeLibertyArr.length; i++) {
+            if (gL == gradeLibertyArr[i]) {
+                auxI = i;
+            }
+        }
+
+        for (int i = 0; i < marginErrorArr.length; i++) {
+            if (mE == marginErrorArr[i]) {
+                auxJ = i;
+            }
+        }
+
+        for (int i = 0; i < tabla.length; i++) {
+            for (int j = 0; j < tabla[i].length; j++) {
+                if (i == auxI && j == auxJ) {
+                    resultado = tabla[i][j];
+                    return resultado;
+                }
+            }
+        }
+
+        return 0;
+    }
 }
