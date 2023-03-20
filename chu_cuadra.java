@@ -10,23 +10,35 @@ public class chu_cuadra {
         int c = sc.nextInt();        
 
         
-        System.out.print("Ingrese el margen de error: ");
-        final double margen = sc.nextDouble(); 
+        if (gradoLibertad(f, c) > 5) {
 
-        int[][] matrizOriginal = llenarMatriz(f, c, sc);
+            System.out.println("No podemos continuar la tabla es muy grande");
+            
+        } else {
+            System.out.print("Ingrese el margen de error: ");
+            final double margen = sc.nextDouble(); 
+    
+            int[][] matrizOriginal = llenarMatriz(f, c, sc);
+            
+            int[] Vmatriz = llenarVArr(f, matrizOriginal);
+    
+            int[] Hmatriz = llenarHArr(c, matrizOriginal);
+    
+            int total = Totales(Hmatriz);
+    
+            double[][] FtMatriz = Ft(f, c, total, Vmatriz, Hmatriz);
+    
+            System.out.println("Chi cuadrada: "+XCuadrada(matrizOriginal, FtMatriz));
+            
+            System.out.println("Chi cuadrada critica: " + tablaDistribucion(gradoLibertad(f, c), margen));
         
-        int[] Vmatriz = llenarVArr(f, matrizOriginal);
+            if (XCuadrada(matrizOriginal, FtMatriz) > tablaDistribucion(gradoLibertad(f, c), margen)) {
+                System.out.println("No son variables depedientes");
+            } else {
+                System.out.println("Son variables dependientes");
+            }
+        }
 
-        int[] Hmatriz = llenarHArr(c, matrizOriginal);
-
-        int total = Totales(Hmatriz);
-
-        double[][] FtMatriz = Ft(f, c, total, Vmatriz, Hmatriz);
-
-        System.out.println("Chi cuadrada: "+XCuadrada(matrizOriginal, FtMatriz));
-
-        System.out.println("Chi cuadrada critica: " + tablaDistribucion(gradoLibertad(f, c), margen));
-        
     }
 
     public static double XCuadrada(int[][] original, double[][] Ft) {
