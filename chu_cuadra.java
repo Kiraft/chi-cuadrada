@@ -7,9 +7,11 @@ public class chu_cuadra {
         System.out.print("Ingresa el tamana de la tabla | FILAS: ");
         int f = sc.nextInt();
         System.out.print("Ingresa el tamana de la tabla | COLUMNAS: ");
-        int c = sc.nextInt() ;        
+        int c = sc.nextInt();        
 
-        final double margen = 0.01;
+        
+        System.out.println("Ingrese el margen de error: ");
+        final double margen = sc.nextDouble(); 
 
         int[][] matrizOriginal = llenarMatriz(f, c, sc);
         
